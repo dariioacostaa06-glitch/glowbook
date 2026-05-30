@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>GlowBook — Tu Centro de Estética & Spa</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+<style>
+*{font-family:'Inter',sans-serif}body{background:#0a0808;color:#f0f0f0}
+.glass{background:rgba(255,255,255,0.04);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,0.08)}
+.accent{color:#f472b6}.accent-bg{background:linear-gradient(135deg,#f472b6,#ec4899)}
+.btn-primary{background:linear-gradient(135deg,#f472b6,#ec4899);color:#fff;font-weight:700;transition:all .2s;border-radius:12px;padding:14px 28px;border:none}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 25px rgba(244,114,182,.4)}
+.card{background:#110d0d;border:1px solid #2a1a1f;border-radius:20px}
+input,select{background:#110d0d;border:1px solid #2a1a1f;color:#f0f0f0;border-radius:10px;padding:12px 16px;width:100%;outline:none;transition:border .2s}
+input:focus,select:focus{border-color:#f472b6}select option{background:#110d0d}
+.treat-item{background:#110d0d;border:1px solid #2a1a1f;border-radius:14px;padding:16px;cursor:pointer;transition:all .3s;display:flex;gap:14px;align-items:center}
+.treat-item:hover,.treat-item.sel{border-color:#f472b640;background:#1a0d13}
+.treat-item.sel{border-color:#f472b6;box-shadow:0 0 15px rgba(244,114,182,.2)}
+.duration-badge{background:#2a0d1a;color:#f472b6;border:1px solid #4a1a2a;border-radius:6px;font-size:11px;font-weight:600;padding:3px 8px}
+.specialist-card{background:#110d0d;border:1px solid #2a1a1f;border-radius:14px;padding:16px;transition:all .3s;cursor:pointer;text-align:center}
+.specialist-card:hover,.specialist-card.sel{border-color:#f472b6;background:#1a0d13}
+.step-indicator{display:flex;gap:0}
+.step-dot2{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;transition:all .3s}
+.step-line{flex:1;height:2px;margin:auto;background:#2a1a1f}
+</style>
+</head>
+<body>
+<nav class="fixed top-0 w-full z-50 glass border-b border-white/5">
+  <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+    <div class="flex items-center gap-3">
+      <div class="w-8 h-8 accent-bg rounded-lg flex items-center justify-center font-black text-white text-sm">GB</div>
+      <span class="font-bold text-lg">GlowBook</span>
+    </div>
+    <div class="hidden md:flex gap-8 text-sm text-gray-400">
+      <a href="#reserva" class="hover:text-white transition">Reservar</a>
+      <a href="#tratamientos" class="hover:text-white transition">Tratamientos</a>
+      <a href="#bonos" class="hover:text-white transition">Bonos</a>
+    </div>
+    <a href="#reserva" class="btn-primary text-sm py-2 px-5">Reservar ahora</a>
+  </div>
+</nav>
+
+<section class="relative min-h-screen flex items-center overflow-hidden">
+  <div class="absolute inset-0"><img src="img/hero.webp" class="w-full h-full object-cover opacity-25"/><div class="absolute inset-0 bg-gradient-to-r from-[#0a0808] via-[#0a0808]/85 to-transparent"></div></div>
+  <div class="relative max-w-6xl mx-auto px-6 pt-24">
+    <span class="text-xs font-bold text-pink-400 uppercase tracking-[0.4em] mb-4 block">✦ Centro de Estética & Spa</span>
+    <h1 class="text-5xl md:text-7xl font-black leading-tight">Tu bienestar,<br/><span class="accent">tu momento.</span></h1>
+    <p class="text-gray-400 mt-6 text-xl max-w-xl">Reserva tu tratamiento en segundos. Elige especialista, horario y listo. Sin esperas, sin llamadas.</p>
+    <div class="flex flex-wrap gap-4 mt-10">
+      <a href="#reserva" class="btn-primary text-base">Reservar tratamiento →</a>
+      <a href="#bonos" class="glass text-white font-semibold rounded-xl px-7 py-4 border border-white/10 hover:border-pink-500/30 transition text-sm">Ver bonos regalo</a>
+    </div>
+    <div class="grid grid-cols-3 gap-4 mt-12 max-w-sm">
+      <div class="glass rounded-xl p-4 text-center"><p class="text-2xl font-black accent">+30</p><p class="text-xs text-gray-500 mt-1">Tratamientos</p></div>
+      <div class="glass rounded-xl p-4 text-center"><p class="text-2xl font-black accent">5</p><p class="text-xs text-gray-500 mt-1">Especialistas</p></div>
+      <div class="glass rounded-xl p-4 text-center"><p class="text-2xl font-black accent">4.9⭐</p><p class="text-xs text-gray-500 mt-1">Valoración</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- RESERVA PASO A PASO -->
+<section id="reserva" class="max-w-5xl mx-auto px-6 py-24">
+  <h2 class="text-3xl font-bold mb-2">Reserva tu cita</h2>
+  <p class="text-gray-500 mb-8 text-sm">Sólo 3 pasos y listo.</p>
+
+  <!-- Stepper -->
+  <div class="step-indicator items-center mb-10 max-w-sm">
+    <div class="step-dot2 accent-bg text-white" id="sd1">1</div>
+    <div class="step-line" id="sl1"></div>
+    <div class="step-dot2 bg-[#2a1a1f] text-gray-500" id="sd2">2</div>
+    <div class="step-line" id="sl2"></div>
+    <div class="step-dot2 bg-[#2a1a1f] text-gray-500" id="sd3">3</div>
+  </div>
+
+  <!-- Step 1: Tratamiento -->
+  <div id="step1">
+    <h3 class="font-bold text-lg mb-5">¿Qué tratamiento quieres?</h3>
+    <div class="grid sm:grid-cols-2 gap-3 mb-6" id="treat-list">
+      <div class="treat-item" onclick="selTreat(this,'Masaje relajante','60 min','55€')"><div class="text-3xl">🧘</div><div class="flex-1"><p class="font-bold text-sm">Masaje relajante</p><p class="text-xs text-gray-500">Aromaterapia + aceites esenciales</p></div><div class="text-right"><p class="font-bold accent text-sm">55€</p><span class="duration-badge mt-1 block">60 min</span></div></div>
+      <div class="treat-item" onclick="selTreat(this,'Masaje deportivo','45 min','50€')"><div class="text-3xl">💪</div><div class="flex-1"><p class="font-bold text-sm">Masaje deportivo</p><p class="text-xs text-gray-500">Descontracturación muscular</p></div><div class="text-right"><p class="font-bold accent text-sm">50€</p><span class="duration-badge mt-1 block">45 min</span></div></div>
+      <div class="treat-item" onclick="selTreat(this,'Facial hidratante','75 min','65€')"><div class="text-3xl">✨</div><div class="flex-1"><p class="font-bold text-sm">Facial hidratante</p><p class="text-xs text-gray-500">Limpieza + hidratación profunda</p></div><div class="text-right"><p class="font-bold accent text-sm">65€</p><span class="duration-badge mt-1 block">75 min</span></div></div>
+      <div class="treat-item" onclick="selTreat(this,'Manicura gel','45 min','30€')"><div class="text-3xl">💅</div><div class="flex-1"><p class="font-bold text-sm">Manicura gel</p><p class="text-xs text-gray-500">Preparación + esmaltado semipermanente</p></div><div class="text-right"><p class="font-bold accent text-sm">30€</p><span class="duration-badge mt-1 block">45 min</span></div></div>
+      <div class="treat-item" onclick="selTreat(this,'Pedicura completa','60 min','40€')"><div class="text-3xl">🦶</div><div class="flex-1"><p class="font-bold text-sm">Pedicura completa</p><p class="text-xs text-gray-500">Exfoliación, hidratación y esmalte</p></div><div class="text-right"><p class="font-bold accent text-sm">40€</p><span class="duration-badge mt-1 block">60 min</span></div></div>
+      <div class="treat-item" onclick="selTreat(this,'Ritual de spa (2h)','120 min','110€')"><div class="text-3xl">🌸</div><div class="flex-1"><p class="font-bold text-sm">Ritual de spa completo</p><p class="text-xs text-gray-500">Masaje + facial + pedicura relax</p></div><div class="text-right"><p class="font-bold accent text-sm">110€</p><span class="duration-badge mt-1 block">120 min</span></div></div>
+      <div class="treat-item" onclick="selTreat(this,'Depilación láser (zona)','30 min','45€')"><div class="text-3xl">⚡</div><div class="flex-1"><p class="font-bold text-sm">Depilación láser</p><p class="text-xs text-gray-500">Zona a elegir · Diodo 808nm</p></div><div class="text-right"><p class="font-bold accent text-sm">45€</p><span class="duration-badge mt-1 block">30 min</span></div></div>
+      <div class="treat-item" onclick="selTreat(this,'Extensiones de pestañas','90 min','75€')"><div class="text-3xl">👁️</div><div class="flex-1"><p class="font-bold text-sm">Extensiones de pestañas</p><p class="text-xs text-gray-500">Volumen · Classic · Wispy</p></div><div class="text-right"><p class="font-bold accent text-sm">75€</p><span class="duration-badge mt-1 block">90 min</span></div></div>
+    </div>
+  </div>
+
+  <!-- Step 2: Especialista + Fecha -->
+  <div id="step2" class="hidden">
+    <div class="glass rounded-xl p-4 mb-6 flex items-center gap-3">
+      <span id="s2-treat-icon" class="text-2xl">🧘</span>
+      <div><p class="font-semibold" id="s2-treat-name"></p><p class="text-sm text-gray-500" id="s2-treat-info"></p></div>
+      <button onclick="goStep(1)" class="ml-auto text-xs text-gray-500 hover:text-white transition">Cambiar</button>
+    </div>
+    <h3 class="font-bold text-lg mb-5">Elige especialista y hora</h3>
+    <div class="grid sm:grid-cols-3 gap-3 mb-6">
+      <div class="specialist-card" onclick="selSpec(this,'Sofía M.')"><img src="img/spa1.webp" class="w-14 h-14 rounded-full object-cover mx-auto mb-2"/><p class="font-semibold text-sm">Sofía M.</p><p class="text-xs text-gray-500">Masajes · Facial</p><p class="text-xs text-green-400 mt-1">Disponible hoy</p></div>
+      <div class="specialist-card" onclick="selSpec(this,'Carmen R.')"><img src="img/spa2.webp" class="w-14 h-14 rounded-full object-cover mx-auto mb-2"/><p class="font-semibold text-sm">Carmen R.</p><p class="text-xs text-gray-500">Uñas · Pestañas</p><p class="text-xs text-green-400 mt-1">Disponible hoy</p></div>
+      <div class="specialist-card" onclick="selSpec(this,'Andrea V.')"><img src="img/nail.webp" class="w-14 h-14 rounded-full object-cover mx-auto mb-2"/><p class="font-semibold text-sm">Andrea V.</p><p class="text-xs text-gray-500">Láser · Estética</p><p class="text-xs text-yellow-400 mt-1">1 hueco disponible</p></div>
+    </div>
+    <div class="grid sm:grid-cols-2 gap-4 mb-6">
+      <input type="date" id="b-date"/>
+      <select id="b-time"><option>10:00</option><option>11:00</option><option>12:00</option><option>13:00</option><option>16:00</option><option>17:00</option><option>18:00</option><option>19:00</option></select>
+    </div>
+    <button onclick="goStep(3)" class="btn-primary px-10 text-sm">Continuar →</button>
+  </div>
+
+  <!-- Step 3: Confirmar -->
+  <div id="step3" class="hidden">
+    <h3 class="font-bold text-lg mb-5">Confirma tu reserva</h3>
+    <div class="card p-6 mb-6 space-y-3 text-sm">
+      <div class="flex justify-between"><span class="text-gray-400">Tratamiento</span><span class="font-semibold" id="c3-treat"></span></div>
+      <div class="flex justify-between"><span class="text-gray-400">Especialista</span><span class="font-semibold" id="c3-spec"></span></div>
+      <div class="flex justify-between"><span class="text-gray-400">Duración</span><span class="font-semibold" id="c3-dur"></span></div>
+      <div class="flex justify-between"><span class="text-gray-400">Precio</span><span class="font-bold accent text-base" id="c3-price"></span></div>
+    </div>
+    <div class="grid sm:grid-cols-2 gap-4 mb-5">
+      <input type="text" placeholder="Tu nombre"/>
+      <input type="tel" placeholder="WhatsApp"/>
+    </div>
+    <button onclick="confirmGlow(this)" class="btn-primary w-full text-base text-center">✨ Confirmar reserva</button>
+  </div>
+
+  <!-- Confirmado -->
+  <div id="step-done" class="hidden text-center py-10">
+    <div class="text-6xl mb-4">💆‍♀️</div>
+    <h3 class="text-2xl font-black">¡Reserva confirmada!</h3>
+    <p class="text-gray-400 mt-3">Te enviamos recordatorio por WhatsApp 1 hora antes.</p>
+    <button onclick="resetGlow()" class="btn-primary mt-6 px-8 text-sm">Nueva reserva</button>
+  </div>
+</section>
+
+<!-- BONOS REGALO -->
+<section id="bonos" class="max-w-6xl mx-auto px-6 py-16">
+  <h2 class="text-3xl font-bold mb-2">Bonos <span class="accent">regalo</span></h2>
+  <p class="text-gray-400 mb-8">El regalo perfecto. Envío digital instantáneo.</p>
+  <div class="grid sm:grid-cols-3 gap-5">
+    <div class="card p-6 text-center"><div class="text-4xl mb-3">🌸</div><h3 class="font-bold text-lg">Bono Relax</h3><p class="text-gray-500 text-sm mt-1 mb-4">Masaje relajante 60 min + té de bienvenida</p><p class="text-3xl font-black accent mb-4">55€</p><button onclick="alert('Bono enviado por email. ¡Sorprende a quien quieras!')" class="btn-primary w-full text-sm py-3 text-center">Regalar ahora</button></div>
+    <div class="card p-6 text-center border-pink-900/40" style="background:linear-gradient(135deg,#1a0d13,#110d0d)"><div class="text-xs font-bold text-pink-400 uppercase tracking-wider mb-2">MÁS VENDIDO</div><div class="text-4xl mb-3">💎</div><h3 class="font-bold text-lg">Bono Glow Day</h3><p class="text-gray-500 text-sm mt-1 mb-4">Ritual completo 2h: masaje + facial + pedicura</p><p class="text-3xl font-black accent mb-4">110€</p><button onclick="alert('Bono enviado por email. ¡Sorprende a quien quieras!')" class="btn-primary w-full text-sm py-3 text-center">Regalar ahora</button></div>
+    <div class="card p-6 text-center"><div class="text-4xl mb-3">💅</div><h3 class="font-bold text-lg">Bono Beauty</h3><p class="text-gray-500 text-sm mt-1 mb-4">Manicura + pedicura + extensiones de pestañas</p><p class="text-3xl font-black accent mb-4">115€</p><button onclick="alert('Bono enviado por email. ¡Sorprende a quien quieras!')" class="btn-primary w-full text-sm py-3 text-center">Regalar ahora</button></div>
+  </div>
+</section>
+
+<footer class="border-t border-white/5 py-8 text-center text-gray-600 text-sm">
+  <p class="font-bold text-white mb-1">GlowBook Centro de Estética</p>
+  <p>Calle Bienestar 8 · Mar–Sáb 10:00–20:00</p>
+  <p class="mt-2">Desarrollado por <span class="accent font-semibold">PuntoZero Solutions</span></p>
+</footer>
+<script>
+let step=1, treatName='', treatDur='', treatPrice='', specName='';
+function selTreat(el, name, dur, price){
+  document.querySelectorAll('.treat-item').forEach(e=>e.classList.remove('sel'));
+  el.classList.add('sel');
+  treatName=name; treatDur=dur; treatPrice=price;
+  setTimeout(()=>goStep(2), 300);
+}
+function selSpec(el, name){
+  document.querySelectorAll('.specialist-card').forEach(e=>e.classList.remove('sel'));
+  el.classList.add('sel');
+  specName=name;
+}
+function goStep(n){
+  step=n;
+  ['step1','step2','step3','step-done'].forEach((id,i)=>{
+    document.getElementById(id).classList.toggle('hidden', i+1!==n && id!=='step-done' || (id==='step-done'&&n!==4));
+  });
+  if(n===2){document.getElementById('s2-treat-name').textContent=treatName; document.getElementById('s2-treat-info').textContent=treatDur+' · '+treatPrice;}
+  if(n===3){document.getElementById('c3-treat').textContent=treatName; document.getElementById('c3-spec').textContent=specName||'Cualquier especialista'; document.getElementById('c3-dur').textContent=treatDur; document.getElementById('c3-price').textContent=treatPrice;}
+  ['sd1','sd2','sd3'].forEach((id,i)=>{
+    const el=document.getElementById(id);
+    el.className='step-dot2 '+(i+1<n?'bg-green-800 text-green-400':i+1===n?'text-white':'bg-[#2a1a1f] text-gray-500');
+    if(i+1<n) el.style.background='#14532d';
+    else if(i+1===n){el.style.background='linear-gradient(135deg,#f472b6,#ec4899)';}
+  });
+  document.getElementById('sl1').style.background=n>1?'#16a34a':'#2a1a1f';
+  document.getElementById('sl2').style.background=n>2?'#16a34a':'#2a1a1f';
+  document.getElementById('reserva').scrollIntoView({behavior:'smooth'});
+  document.getElementById('step-done').classList.toggle('hidden', n!==4);
+}
+function confirmGlow(btn){goStep(4);}
+function resetGlow(){goStep(1); treatName=treatDur=treatPrice=specName=''; document.querySelectorAll('.treat-item,.specialist-card').forEach(e=>e.classList.remove('sel'));}
+document.getElementById('b-date').valueAsDate=new Date();
+</script>
+</body></html>
